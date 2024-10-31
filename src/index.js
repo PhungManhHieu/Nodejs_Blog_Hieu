@@ -2,9 +2,9 @@ const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const handlebars = require('express-handlebars').engine; // khai báo làm theo doc phải thêm .engine ở cuối
-
 const app = express();
 const port = 3000;
+const route = require('./routes');
 
 app.use(express.static(path.join(__dirname, 'public')))
 
@@ -18,15 +18,8 @@ app.engine('hbs', handlebars({
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resources/views'));
 
-// Đường dẫn cho trang chủ
-app.get('/', (req, res) => {
-  res.render('home');  
-});
-
-//Đường dẫn đến trang tin tức
-app.get('/tintuc', (req, res) => {
-  res.render('news');  
-});
+// Khởi tạo tuyến đường
+route(app);
 
 // Khởi động ứng dụng
 app.listen(port, () => console.log(`Trang của bạn chạy theo địa chỉ này http://localhost:${port}`));
