@@ -1,14 +1,16 @@
+const newsRouter = require("./news");
+const siteRouter = require("./site");
+const meRouter = require("./me");
+const coursesRouter = require("./courses");
 
-const newsRouter = require('./news');  
-const siteRouter = require('./site');  
+function route(app) {
+  //Đường dẫn đến trang tin tức
+  app.use("/news", newsRouter);
+  app.use("/me", meRouter);
+  app.use("/courses", coursesRouter);
 
-function route(app){
-    
-    //Đường dẫn đến trang tin tức
-    app.use('/news', newsRouter);
-
-    // Đường dẫn cho trang chủ
-    app.use('/', siteRouter);
-};
+  // Đường dẫn cho trang chủ
+  app.use("/", siteRouter);
+}
 
 module.exports = route;
